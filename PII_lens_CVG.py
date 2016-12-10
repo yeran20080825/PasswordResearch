@@ -82,6 +82,7 @@ class CVG:
 		b = reduce(operator.add, [y * y for y in self.caldatalens()])
 		# print self.password,'\t' ,  self.birthday,'\t' ,a ,'\t',b,'\t',len(self.password),'\t', len(self.birthday)
 		print float(a + b)/numpy.square(len(self.password))
+		return float(a + b)/numpy.square(len(self.password))
 
 
 
@@ -89,24 +90,34 @@ class CVG:
 
 
 def main():
-	passwordfile = open('//Users//Aran//Documents//AvailablePasswors//12306//password.txt', 'r')
-	namefile = open('//Users//Aran//Documents//AvailablePasswors//12306//username.txt', 'r')
-	idfile = open('//Users//Aran//Documents//AvailablePasswors//12306//ID.txt', 'r')
+	passwordfile = open('E:\\AvailablePasswors\\12306\\password.txt', 'r')
+	namefile = open('E:\\AvailablePasswors\\12306\\username.txt', 'r')
+	birthdayfile = open('E:\\AvailablePasswors\\12306\\birthday.txt', 'r')
 
 	c = CVG();
+	cvglist = []
 
-	line = 131653
-	while line:
-		passwordline = passwordfile.readline().strip('\n')
-		nameline = namefile.readline().strip('\n')
-		idline = idfile.readline().strip('\n')
+
+	passwordline = passwordfile.readline().strip('\n')
+	nameline = namefile.readline().strip('\n')
+	birthdayline = birthdayfile.readline().strip('\n')
+	while passwordline:
 
 		# c = CVG(repr(passwordline), unicode(repr(nameline), "utf-8"), repr(idline))
 		c.setpassword(passwordline)
-		c.setname(unicode(nameline, "gb2312",'ignore'))
-		c.setbirthday(idline)
-		c.cvg()
-		line -= 1
+		c.setname(unicode(nameline, "gb2312", 'ignore'))
+		c.setbirthday(birthdayline)
+		cvglist.append(c.cvg())
+		passwordline = passwordfile.readline().strip('\n')
+		nameline = namefile.readline().strip('\n')
+		birthdayline = birthdayfile.readline().strip('\n')
+
+	passwordfile.close()
+	namefile.close()
+	birthdayfile.close()
+	s = '\n'.join(str(num)[:] for num in cvglist)
+	myfile = open('E:\\AvailablePasswors\\12306\\cvgfileNew.txt', 'w')
+	myfile.write(s)
 
 
 if __name__ == '__main__':
