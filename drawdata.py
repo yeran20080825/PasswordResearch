@@ -3,7 +3,7 @@ from matplotlib import pyplot
 import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 # import scipy
-myfile = open('E:\\AvailablePasswors\\12306\\cvgfileNew.txt', 'r')
+myfile = open('E:\\AvailablePasswors\\12306\\cvgfileNew1214.txt', 'r')
 # cvgdatalist = myfile.readlines()
 # myfile.close()
 cvgdatalist = np.loadtxt(myfile)
